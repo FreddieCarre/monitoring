@@ -1,0 +1,29 @@
+{
+  "name": "@monitoring/services",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack --config webpack.config.js",
+    "start": "ts-node ./src/server",
+    "influx:seed": "ts-node ./loadData.ts"
+  },
+  "dependencies": {
+    "@influxdata/influxdb-client": "^1.10.0",
+    "apollo-server": "^2.21.0",
+    "graphql": "^15.5.0",
+    "pino": "^6.11.1",
+    "pino-pretty": "^4.5.0"
+  },
+  "devDependencies": {
+    "@types/pino": "^6.3.6",
+    "@types/webpack-env": "^1.16.0",
+    "apollo-server-testing": "^2.21.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "ts-loader": "^8.0.17",
+    "ts-node": "^9.1.1",
+    "webpack": "^5.24.2",
+    "webpack-cli": "^4.5.0",
+    "webpack-node-externals": "^2.5.2"
+  }
+}

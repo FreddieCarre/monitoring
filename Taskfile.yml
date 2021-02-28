@@ -1,0 +1,45 @@
+version: '3'
+
+tasks:
+  build:
+    cmds:
+      - docker-compose build
+
+  install:
+    cmds:
+      - docker-compose run --rm services yarn
+
+  init:
+    cmds:
+      - task: install
+
+  run:
+    cmds:
+      - docker-compose run --rm services {{.RUN}}
+
+  up:
+    cmds:
+      - docker-compose up -d
+
+  down:
+    cmds:
+      - docker-compose down
+
+  restart:
+    cmds:
+      - task: down
+      - task: up
+
+  logs:
+    cmds:
+      - docker-compose logs -f
+
+  seed:
+    cmds:
+      - task: run
+        vars: {RUN: "yarn --cwd packages/services influx:seed"}
+
+  test:
+    cmds:
+      - task: run
+        vars: {RUN: "yarn jest"}

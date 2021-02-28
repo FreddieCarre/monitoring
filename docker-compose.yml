@@ -1,0 +1,48 @@
+version: '3.7'
+
+x-shared-volumes: &shared-volumes
+  - ./:/app:rw
+  - workspace_modules:/app/node_modules
+  - workspace_yarn_cache:/home/node/.cache/yarn
+  - ui_modules:/app/packages/ui/node_modules
+  - services_modules:/app/packages/services/node_modules
+
+services:
+  ui:
+    image: node:15.10.0-alpine3.10
+    working_dir: /app
+    command: yarn --cwd packages/ui start
+    volumes: *shared-volumes
+    ports:
+      - 3000:3000
+
+  services:
+    image: node:15.10.0-alpine3.10
+    working_dir: /app
+    command: yarn --cwd packages/services start
+    volumes: *shared-volumes
+    ports:
+      - 4000:4000
+    environment:
+      INFLUX_TOKEN: "T5EQ-r5LPogQUvDNAky1SyageU3uB3it6am8JeE5qnzmRFKo9rafbB5RKdrHwoP6bvVWSveheUjIFmKOE_Gm1A=="
+      INFLUX_BUCKET: test
+
+  influx:
+    image: influxdb
+    ports:
+      - 8086:8086
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_USERNAME: local
+      DOCKER_INFLUXDB_INIT_PASSWORD: local_test_password
+      DOCKER_INFLUXDB_INIT_ORG: test
+      DOCKER_INFLUXDB_INIT_BUCKET: test
+    volumes:
+      - influx_data:/root/influxdb/data
+
+volumes:
+  workspace_modules:
+  workspace_yarn_cache:
+  ui_modules:
+  services_modules:
+  influx_data:
