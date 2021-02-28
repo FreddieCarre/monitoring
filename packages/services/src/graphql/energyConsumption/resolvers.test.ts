@@ -18,7 +18,10 @@ describe('energyConsumption', () => {
 
   it('should return an empty array when no measurements found', async () => {
     mockQuery([]);
-    await expect(energyConsumption()).resolves.toStrictEqual([]);
+    await expect(energyConsumption(
+      null,
+      { start: '2020-11-01T12:00:00.222Z', stop: '2020-11-01T12:00:00.222Z' }
+    )).resolves.toStrictEqual([]);
   });
 
   it('should return an array of one value when one measurement is found', async () => {
@@ -30,7 +33,10 @@ describe('energyConsumption', () => {
         _measurement: 'mockMeasurement'
       }
     ]);
-    await expect(energyConsumption()).resolves.toStrictEqual([{
+    await expect(energyConsumption(
+      null,
+      { start: '2020-11-01T11:00:00.222Z', stop: '2020-11-01T13:00:00.222Z' }
+    )).resolves.toStrictEqual([{
       Consumption: 6.53,
       Timestamp: '2020-11-01T12:00:00.222Z'
     }]);
@@ -57,7 +63,10 @@ describe('energyConsumption', () => {
         _measurement: 'mockMeasurement'
       },
     ]);
-    await expect(energyConsumption()).resolves.toStrictEqual([
+    await expect(energyConsumption(
+      null,
+      { start: '2020-11-01T11:00:00.222Z', stop: '2020-11-01T13:00:00.222Z' }
+    )).resolves.toStrictEqual([
       {
         Consumption: 6.53,
         Timestamp: '2020-11-01T12:00:00.222Z'
@@ -79,6 +88,9 @@ describe('energyConsumption', () => {
         .mockReturnValue(Promise.reject('mock error'))
     } as unknown as QueryApi));
 
-    await expect(energyConsumption()).rejects.toThrow('mock error');
+    await expect(energyConsumption(
+      null,
+      { start: '2020-11-01T11:00:00.222Z', stop: '2020-11-01T13:00:00.222Z' }
+    )).rejects.toThrow('mock error');
   });
 });

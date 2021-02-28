@@ -12,6 +12,7 @@ tasks:
   init:
     cmds:
       - task: install
+      - task: seed
 
   run:
     cmds:

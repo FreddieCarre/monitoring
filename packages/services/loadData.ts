@@ -37,7 +37,7 @@ try {
     }
   );
 
-  logger.debug('Writing to Influx');
+  logger.info('Writing to Influx');
   writeApi.writePoints(energyConsumptionPoints);
   writeApi.writePoints(energyConsumptionAnomalousPoints);
   writeApi.writePoints(weatherPoints);

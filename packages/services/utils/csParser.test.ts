@@ -40,7 +40,7 @@ describe('convertCsvStringToObject', () => {
 })
 
 describe('parseDate', () => {
-  it('should return ISO formatted date without alterations', () => {
+  it('should return date as string without alterations', () => {
     const inputDates = [
       '2020-01-09T12:52:23.021Z',
       '2020-01-01T02:30:00Z',
@@ -52,23 +52,23 @@ describe('parseDate', () => {
     })
   });
 
-  it('should return ISO formatted date after altering known format input', () => {
+  it('should return date object after converting known format input', () => {
     const inputDates = [
       {
         pre: '01/01/2020 06:00',
-        parsed: '2020-01-01T06:00:00.000Z'
+        parsed: new Date('2020-01-01T06:00:00.000Z')
       },
       {
         pre: '02/01/2020 07:30',
-        parsed: '2020-01-02T07:30:00.000Z'
+        parsed: new Date('2020-01-02T07:30:00.000Z')
       },
       {
         pre:  '03/01/2020 12:00',
-        parsed: '2020-01-03T12:00:00.000Z'
+        parsed: new Date('2020-01-03T12:00:00.000Z')
       },
       {
         pre:  '07/01/2020 23:30',
-        parsed: '2020-01-07T23:30:00.000Z'
+        parsed: new Date('2020-01-07T23:30:00.000Z')
       }
     ];
 

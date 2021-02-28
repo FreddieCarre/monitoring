@@ -11,11 +11,6 @@ import {
 } from './graphql/weather';
 import { Query } from './graphql';
 
-if (module.hot) {
-  module.hot.accept();
-  module.hot.dispose(() => logger.info('Module disposed'));
-}
-
 export const server = new ApolloServer({
   typeDefs: [Query, EnergyTypes, WeatherTypes],
   resolvers: [EnergyResolvers, WeatherResolvers]

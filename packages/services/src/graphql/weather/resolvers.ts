@@ -1,17 +1,20 @@
 import { getQueryApi, InfluxMeasurement } from '../../influx';
 import { getAllWeather } from '../../influx/queries';
-import { Weather } from '../../../interfaces';
+import { Weather, Timings } from '../../../interfaces';
 import { logger } from '../../../utils/logger';
 
 export const resolvers = {
   Query: {
-    async weather() {
+    async weather(_p: any, args: Timings) {
       return getQueryApi()
-        .collectRows<InfluxMeasurement>(getAllWeather({}))
+        .collectRows<InfluxMeasurement>(
+          getAllWeather(args)
+        )
         .then(measurements => {
-          logger.info({ count: measurements.length }, 'retrieved measurements from Influx');
+          logger.info({
+            count: measurements.length
+          }, 'retrieved measurements from Influx');
 
-          console.log(measurements);
           return measurements.map(({ _value, _time, _field }) => ({
             ...(_field === 'average_temperature' ? {
               AverageTemperature: _value

@@ -1,16 +1,16 @@
 import { gql } from '@apollo/client';
 
 export const ENERGY_CONSUMPTION = gql`
-  query FullQuery {
-    energyConsumption {
+  query FullQuery($start: String, $stop: String) {
+    energyConsumption(start: $start, stop: $stop) {
       Timestamp
       Consumption
     }
-    energyConsumptionAnomalies {
+    energyConsumptionAnomalies(start: $start, stop: $stop) {
       Timestamp
       Consumption
     }
-    weather {
+    weather(start: $start, stop: $stop) {
       ... on Temperature {
         Timestamp
         AverageTemperature

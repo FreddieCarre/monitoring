@@ -14,7 +14,7 @@ export const typeDefs = gql`
   union Weather = Temperature | Humidity
 
   extend type Query {
-    weather: [Weather]
+    weather(start: String, stop: String): [Weather]
   }
 `;
 

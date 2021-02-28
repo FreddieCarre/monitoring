@@ -1,0 +1,66 @@
+html,body
+{
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden; 
+}
+
+#header {
+  background-color: #72d0ad;
+  padding: 1em 3em;
+  width: 100%;
+  height: 10%;
+}
+
+#range-selector {
+  margin-right: 4em;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+#range-selector div {
+  float: right;
+  flex-direction: column;
+  margin-right: 1em;
+}
+
+#range-selector label {
+  color: #2d353f;
+  font-size: 20px;
+}
+
+#range-selector input {
+  background-color: #2d353f; 
+  border-radius: 10px;
+  color: white;
+  border: none;
+  margin: 1em;
+  height: 1em;
+  padding: 1em;
+  width: 70%;
+  float: right;
+}
+
+#metrics-container {
+  width: 100%;
+  color: #72d0ad;
+  padding-top: 2em;
+  display: inline-flex;
+  justify-content: space-evenly;
+}
+
+#metrics-container > div {
+  background-color: #2d353f;
+  width: 30em;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
+  border-radius: 10px;
+}
+
+#metrics-container > div > p {
+  font-size: 100px;
+}

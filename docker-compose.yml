@@ -24,7 +24,7 @@ services:
     ports:
       - 4000:4000
     environment:
-      INFLUX_TOKEN: "T5EQ-r5LPogQUvDNAky1SyageU3uB3it6am8JeE5qnzmRFKo9rafbB5RKdrHwoP6bvVWSveheUjIFmKOE_Gm1A=="
+      INFLUX_TOKEN: ${INFLUX_TOKEN}
       INFLUX_BUCKET: test
 
   influx:
@@ -35,6 +35,7 @@ services:
       DOCKER_INFLUXDB_INIT_MODE: setup
       DOCKER_INFLUXDB_INIT_USERNAME: local
       DOCKER_INFLUXDB_INIT_PASSWORD: local_test_password
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: ${INFLUX_TOKEN}
       DOCKER_INFLUXDB_INIT_ORG: test
       DOCKER_INFLUXDB_INIT_BUCKET: test
     volumes:

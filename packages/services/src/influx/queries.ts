@@ -1,4 +1,5 @@
 import { flux } from '@influxdata/influxdb-client';
+import { Timings } from '../../interfaces';
 import { logger } from '../../utils/logger';
 
 const {
@@ -6,10 +7,14 @@ const {
 } = process.env;
 
 export const getAllEnergyConsumption = ({
-  start = '2020-01-03T00:00:00.000Z',
-  stop = '2020-01-03T23:59:59.999Z'
-}) => {
-  logger.info({ bucket: process.env.INFLUX_BUCKET }, 'Getting energy consumption data');
+  start,
+  stop
+}: Timings) => {
+  logger.info({
+    bucket: process.env.INFLUX_BUCKET,
+    start,
+    stop
+  }, 'Getting energy consumption data');
 
   return flux`
     from(bucket: ${INFLUX_BUCKET})
@@ -21,10 +26,14 @@ export const getAllEnergyConsumption = ({
 };
 
 export const getEnergyConsumptionAnomalies = ({
-  start = '2020-01-03T00:00:00.000Z',
-  stop = '2020-01-03T23:59:59.999Z'
-}) => {
-  logger.info({ bucket: process.env.INFLUX_BUCKET }, 'Getting energy consumption anomalies');
+  start,
+  stop
+}: Timings) => {
+  logger.info({
+    bucket: process.env.INFLUX_BUCKET,
+    start,
+    stop
+  }, 'Getting energy consumption anomalies');
 
   return flux`
     from(bucket: ${INFLUX_BUCKET})
@@ -36,10 +45,14 @@ export const getEnergyConsumptionAnomalies = ({
 };
 
 export const getAllWeather = ({
-  start = '2020-01-03T00:00:00.000Z',
-  stop = '2020-01-03T23:59:59.999Z'
-}) => {
-  logger.info({ bucket: process.env.INFLUX_BUCKET }, 'Getting temperature data');
+  start,
+  stop
+}: Timings) => {
+  logger.info({
+    bucket: process.env.INFLUX_BUCKET,
+    start,
+    stop
+  }, 'Getting temperature data');
 
   return flux`
     from(bucket: ${INFLUX_BUCKET})

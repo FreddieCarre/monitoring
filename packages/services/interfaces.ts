@@ -8,3 +8,8 @@ export type Weather = {
   AverageTemperature: string, 
   AverageHumidity: string 
 };
+
+export type Timings = {
+  start: string,
+  stop: string
+};

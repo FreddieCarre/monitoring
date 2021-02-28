@@ -7,7 +7,7 @@ export const typeDefs = gql`
   }
 
   extend type Query {
-    energyConsumption: [EnergyConsumption]
-    energyConsumptionAnomalies: [EnergyConsumption]
+    energyConsumption(start: String, stop: String): [EnergyConsumption]
+    energyConsumptionAnomalies(start: String, stop: String): [EnergyConsumption]
   }
 `;
