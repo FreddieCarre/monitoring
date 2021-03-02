@@ -46,6 +46,11 @@
     "@babel/preset-env": "^7.13.8",
     "@babel/preset-react": "^7.12.13",
     "@babel/preset-typescript": "^7.13.0",
-    "@types/highcharts": "^7.0.0"
+    "@miragejs/graphql": "^0.1.11",
+    "@testing-library/react-hooks": "^5.1.0",
+    "@types/highcharts": "^7.0.0",
+    "fishery": "^1.2.0",
+    "miragejs": "^0.1.41",
+    "regenerator-runtime": "^0.13.7"
   }
 }

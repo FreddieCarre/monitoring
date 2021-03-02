@@ -34,9 +34,9 @@ const RangeInput: React.FC<RangeInputProps> = ({
   return (
     <div>
       <label htmlFor={name}>{name}</label>
-      <input id={name} name={name} type="text" value={range[name]} onChange={handleChange} />
+      <input id={name} data-testid={name} name={name} type="text" value={range[name]} onChange={handleChange} />
       {!DATE_TIME_REGEX.test(range[name]) &&
-        <p>Please type dates in the format yyyy-mm-ddTHH:mm:ss.SSS</p>
+        <p data-testid={`${name}-error`}>Please type dates in the format yyyy-mm-ddTHH:mm:ss.SSS</p>
       }
     </div>
   );

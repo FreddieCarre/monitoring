@@ -27,15 +27,11 @@ This application serves as a mechanism for reading energy usage data and present
 
 ### Front end
 
-- Font is a bit dull
 - General style is slightly outdated
 - Query could be adapted to choose which datapoints are being retrieved
+- Select the interval for polling
 - Validation for time input
-- Bunch of useEffect calls for sorting data look untidy. Would like to refactor those
-
-4. Use Apollo Subscription to enable live updates from the data collectors
-
-- Utilise websocket technology to receive new data which will be pushed to the client via Apollo
+- update useEffect to conduct deep equality check on data object (lodash/useDeepCompareEffect?)
 
 5. Add authentication
 
@@ -51,13 +47,30 @@ This application serves as a mechanism for reading energy usage data and present
 8. CI
 
 - GitHub Actions?
+- lint -> build -> test
 
 9. Deployment
 
-- ECS with Fargate?
+- EKS in private subnet + load balancers in public subnet?
 - CloudFormation
 - Bash to execute
 
+## Application Flow
+
+### Data Store
+
+1. Data is streamed from source
+2. Data is normalised/validated in-flight by a function (csvParser.ts)
+3. Data is stored in InfluxDB
+
+### Reading Data
+
+1. ReactJS client
+2. ApolloClient to query GraphQL service
+3. User selects range and poll settings (stored in Context rather than redux)
+4. useQuery polls every `$POLL_INTERVAL`
+5. useEffect parses response when response data changes and updates state for each metric
+6. The state for each metric is passed to the relevant display component (graph/metric cards)
 
 ## Running the solution
 

@@ -10,12 +10,15 @@ html,body
   background-color: #72d0ad;
   padding: 1em 3em;
   width: 100%;
-  height: 10%;
+  height: auto;
+  display: inline-flex;
+  justify-content: space-between;
 }
 
 #range-selector {
   margin-right: 4em;
   display: flex;
+  align-self: right;
   flex-direction: row;
   justify-content: flex-end;
 }

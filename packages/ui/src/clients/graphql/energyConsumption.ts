@@ -34,9 +34,3 @@ export type Weather = {
   AverageHumidity: number
 };
 
-export type GraphData = {
-  energyConsumption: EnergyConsumption[]
-  energyConsumptionAnomalies: EnergyConsumption[]
-  weather: Weather[]
-};
-

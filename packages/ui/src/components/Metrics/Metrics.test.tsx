@@ -1,48 +1,46 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
-import { Metrics } from '.';
+import { MetricCard, Metrics } from '.';
+import { SeriesAreaDataOptions } from 'highcharts';
 
 describe('Metrics', () => {
-  describe('AverageEnergyConsumptionMetrics', () => {
-    it('should display the calculated average for the provided data', () => {
-      const energyConsumption = [
-        {
-          Timestamp: '',
-          Consumption: 1
-        },
-        {
-          Timestamp: '',
-          Consumption: 2
-        },
-        {
-          Timestamp: '',
-          Consumption: 3
-        }
-      ];
+  const getSeriesData = (d: number[][]) => d.map(v => v as SeriesAreaDataOptions);
 
-      render(<Metrics energyConsumption={energyConsumption} />);
+  describe('MetricCard', () => {
+    it('should display the calculated average for the energyConsumption', () => {
+      const energyConsumption: SeriesAreaDataOptions[] = getSeriesData([
+        [0, 1], [1, 2], [2, 3]
+      ]);
 
-      expect(screen.getByTestId('average-consumption')).toHaveTextContent('2');
+      render(<MetricCard name="Test Card" id="test-card" data={energyConsumption} />);
+
+      expect(screen.getByTestId('test-card')).toHaveTextContent('2');
     });
 
-    it('should display the calculated average for a single data point', () => {
-      const energyConsumption = [
-        {
-          Timestamp: '',
-          Consumption: 1.65
-        }
-      ];
+    it('should display the calculated average for the weather', () => {
+      const temperature: SeriesAreaDataOptions[] = getSeriesData([
+        [0, 1], [1, 2], [2, 3]
+      ]);
+      const humidity: SeriesAreaDataOptions[] = getSeriesData([
+        [0, 4], [1, 5], [2, 6]
+      ]);
+      const energy: SeriesAreaDataOptions[] = getSeriesData([
+        [0, 7], [1, 8], [2, 9]
+      ]);
 
-      render(<Metrics energyConsumption={energyConsumption} />);
+      render(<Metrics energyConsumption={energy} humidity={humidity} temperature={temperature} />);
 
-      expect(screen.getByTestId('average-consumption')).toHaveTextContent('1.65');
+      expect(screen.getByTestId('average-temperature')).toHaveTextContent('2');
+      expect(screen.getByTestId('average-humidity')).toHaveTextContent('5');
+      expect(screen.getByTestId('average-consumption')).toHaveTextContent('8');
     });
 
     it('should display nothing when no data provided', () => {
       render(<Metrics />);
 
-      expect(screen.getByTestId('average-consumption')).toHaveTextContent('');
+      expect(screen.getByTestId('average-temperature')).toHaveTextContent('0');
+      expect(screen.getByTestId('average-humidity')).toHaveTextContent('0');
+      expect(screen.getByTestId('average-consumption')).toHaveTextContent('0');
     });
   });
 });

@@ -2,12 +2,12 @@ import React, { useContext } from 'react';
 import { useQuery } from '@apollo/client';
 
 import { RangeContext } from '../Page';
-import { DataState } from './DataState';
+import { Graph } from '../Graph';
 import { Metrics } from '../Metrics';
-import {
-  ENERGY_CONSUMPTION,
-  GraphData
-} from '../../graphql/energyConsumption';
+
+import { useDataExtraction } from '../../hooks/useDataExtraction';
+import { ENERGY_CONSUMPTION } from '../../clients/graphql/energyConsumption';
+import { GraphData } from '../../interfaces';
 
 export const DisplayData = () => {
   const { start, stop } = useContext(RangeContext);
@@ -20,23 +20,36 @@ export const DisplayData = () => {
     pollInterval: 10_000
   });
 
+  const energyConsumption = useDataExtraction(data, 'energyConsumption', 'Consumption')
+  const energyAnomalies = useDataExtraction(data, 'energyConsumptionAnomalies', 'Consumption')
+  const humidityData = useDataExtraction(data, 'weather', 'AverageHumidity')
+  const temperatureData = useDataExtraction(data, 'weather', 'AverageTemperature')
+
   if (error) {
     console.log(error);
 
     return <p>Error :( </p>;
   };
 
-  return <>
+  return (
+    <>
       {loading ? (
         <p>Loading...</p>
       ) : (
         <>
-          <DataState data={data} />
-        <Metrics
-          energyConsumption={data?.energyConsumption}
-          weather={data?.weather}
-        />
+          <Graph
+            energyConsumption={energyConsumption}
+            energyAnomalies={energyAnomalies}
+            temperatureData={temperatureData}
+            humidityData={humidityData}
+          />
+          <Metrics
+            energyConsumption={energyConsumption}
+            temperature={temperatureData}
+            humidity={humidityData}
+          />
         </>
       )}
-    </>;
+    </>
+  );
 };

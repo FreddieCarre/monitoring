@@ -8,6 +8,7 @@ type GraphWrapperProps = {
   temperatureData?: Highcharts.SeriesAreaDataOptions[],
   humidityData?: Highcharts.SeriesAreaDataOptions[]
 };
+
 export const Graph: React.FC<GraphWrapperProps> = ({
   energyConsumption = [],
   energyAnomalies = [],
@@ -17,7 +18,7 @@ export const Graph: React.FC<GraphWrapperProps> = ({
 
   const chartState: Highcharts.Options = {
     title: {
-      text: 'Energy Consumption'
+      text: 'Energy Consumption Data'
     },
     xAxis: {
       type: 'datetime'

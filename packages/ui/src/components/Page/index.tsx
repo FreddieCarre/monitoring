@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { DisplayData } from '../DisplayData';
-import {Header} from '../Header';
+import { Header } from '../Header';
 
 const defaultRange = {
   start: '2020-01-03T00:00:00.000Z',
